@@ -8,336 +8,87 @@
 <title>Estimate — Florida Auto Center</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Fraunces:ital,wght@0,300;0,500&display=swap');
-
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-html, body {
-  width: 100%;
-  height: 100%;
-  background: #f7f5f0;
-  color: #1a1814;
-  font-family: 'DM Mono', monospace;
-  font-size: 16px;
-  -webkit-text-size-adjust: 100%;
-  overflow-x: hidden;
-}
-
-.hdr {
-  background: #1a1814;
-  padding: 20px 20px 18px;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
-
-.hdr-label {
-  font-size: 10px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: #c8a96e;
-  margin-bottom: 4px;
-}
-
-.hdr-title {
-  font-family: 'Fraunces', serif;
-  font-size: 22px;
-  font-weight: 300;
-  color: #f0ece4;
-}
-
-.content {
-  padding: 16px;
-  width: 100%;
-  max-width: 600px;
-  margin: 0 auto;
-  padding-bottom: 48px;
-}
-
-.section {
-  background: #fff;
-  border: 1px solid #ddd9d2;
-  border-radius: 12px;
-  padding: 18px 16px;
-  margin-bottom: 14px;
-}
-
-.stitle {
-  font-size: 10px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: #b8924a;
-  margin-bottom: 16px;
-}
-
-.field { margin-bottom: 14px; }
-.field:last-child { margin-bottom: 0; }
-
-label {
-  display: block;
-  font-size: 11px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: #8a847a;
-  margin-bottom: 6px;
-}
-
-label .req { color: #b8924a; margin-left: 2px; }
-
-input[type=text],
-input[type=number],
-select,
-textarea {
-  width: 100%;
-  padding: 14px 16px;
-  border: 1px solid #ddd9d2;
-  border-radius: 8px;
-  background: #faf9f6;
-  color: #1a1814;
-  font-family: 'DM Mono', monospace;
-  font-size: 16px; /* 16px prevents iOS zoom */
-  outline: none;
-  -webkit-appearance: none;
-  appearance: none;
-  transition: border-color 0.2s;
-}
-
-input:focus, select:focus, textarea:focus {
-  border-color: #b8924a;
-  background: #fff;
-}
-
-input[type=number] { -moz-appearance: textfield; }
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
-
-textarea { resize: none; min-height: 72px; line-height: 1.5; }
-
-.g2 {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-}
-
-/* ITEM CARD */
-.icard {
-  background: #faf9f6;
-  border: 1px solid #ddd9d2;
-  border-radius: 10px;
-  padding: 16px;
-  margin-bottom: 10px;
-  position: relative;
-}
-
-.inum {
-  font-size: 10px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: #b8924a;
-  margin-bottom: 12px;
-}
-
-.rm-btn {
-  position: absolute;
-  top: 14px;
-  right: 14px;
-  background: #fdf0f0;
-  border: 1px solid rgba(154,44,44,0.2);
-  color: #9a2c2c;
-  border-radius: 6px;
-  padding: 6px 10px;
-  font-size: 13px;
-  cursor: pointer;
-  font-family: 'DM Mono', monospace;
-  -webkit-tap-highlight-color: transparent;
-}
-
-.add-btn {
-  width: 100%;
-  padding: 16px;
-  border: 1px dashed #ddd9d2;
-  border-radius: 10px;
-  background: transparent;
-  color: #8a847a;
-  font-family: 'DM Mono', monospace;
-  font-size: 14px;
-  cursor: pointer;
-  transition: all 0.15s;
-  margin-top: 6px;
-  -webkit-tap-highlight-color: transparent;
-}
-
-.add-btn:active { border-color: #b8924a; color: #b8924a; }
-
-/* SUBMIT */
-.sub-btn {
-  width: 100%;
-  padding: 18px;
-  background: #1a1814;
-  color: #c8a96e;
-  border: none;
-  border-radius: 10px;
-  font-family: 'DM Mono', monospace;
-  font-size: 15px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  font-weight: 500;
-  cursor: pointer;
-  margin-top: 8px;
-  -webkit-tap-highlight-color: transparent;
-  transition: opacity 0.2s;
-}
-
-.sub-btn:disabled { opacity: 0.5; cursor: default; }
-.sub-btn:active:not(:disabled) { opacity: 0.8; }
-
-.spinner {
-  display: none;
-  text-align: center;
-  padding: 14px;
-  color: #8a847a;
-  font-size: 13px;
-}
-
-.err {
-  background: #fdf0f0;
-  border: 1px solid rgba(154,44,44,0.2);
-  color: #9a2c2c;
-  border-radius: 8px;
-  padding: 14px 16px;
-  font-size: 13px;
-  margin-top: 10px;
-  display: none;
-  line-height: 1.5;
-}
-
-/* SUCCESS */
-#success-view {
-  display: none;
-  text-align: center;
-  padding: 40px 20px;
-}
-
-.sicon { font-size: 56px; margin-bottom: 16px; }
-
-.stit {
-  font-family: 'Fraunces', serif;
-  font-size: 26px;
-  font-weight: 300;
-  color: #3a6b4a;
-  margin-bottom: 8px;
-}
-
-.sid {
-  font-size: 13px;
-  color: #8a847a;
-  margin-bottom: 24px;
-  font-family: monospace;
-  line-height: 1.6;
-}
-
-.snote {
-  font-size: 13px;
-  color: #5a7a6a;
-  line-height: 1.7;
-  background: #edf5f0;
-  border: 1px solid rgba(58,107,74,0.2);
-  border-radius: 10px;
-  padding: 16px;
-  text-align: left;
-}
-
-.new-btn {
-  width: 100%;
-  padding: 16px;
-  background: #1a1814;
-  color: #c8a96e;
-  border: none;
-  border-radius: 10px;
-  font-family: 'DM Mono', monospace;
-  font-size: 14px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  cursor: pointer;
-  margin-top: 16px;
-}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;background:#f7f5f0;color:#1a1814;font-family:'DM Mono',monospace;font-size:16px;-webkit-text-size-adjust:100%;overflow-x:hidden}
+.hdr{background:#1a1814;padding:20px;position:sticky;top:0;z-index:100}
+.hdr-label{font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:#c8a96e;margin-bottom:4px}
+.hdr-title{font-family:'Fraunces',serif;font-size:22px;font-weight:300;color:#f0ece4}
+.content{padding:16px;width:100%;max-width:600px;margin:0 auto;padding-bottom:48px}
+.section{background:#fff;border:1px solid #ddd9d2;border-radius:12px;padding:18px 16px;margin-bottom:14px}
+.stitle{font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#b8924a;margin-bottom:16px}
+.field{margin-bottom:14px}
+.field:last-child{margin-bottom:0}
+label{display:block;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#8a847a;margin-bottom:6px}
+label .req{color:#b8924a;margin-left:2px}
+input[type=text],input[type=number],select,textarea{width:100%;padding:14px 16px;border:1px solid #ddd9d2;border-radius:8px;background:#faf9f6;color:#1a1814;font-family:'DM Mono',monospace;font-size:16px;outline:none;-webkit-appearance:none;appearance:none;transition:border-color 0.2s}
+input:focus,select:focus,textarea:focus{border-color:#b8924a;background:#fff}
+input[type=number]{-moz-appearance:textfield}
+input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none}
+textarea{resize:none;min-height:72px;line-height:1.5}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.icard{background:#faf9f6;border:1px solid #ddd9d2;border-radius:10px;padding:16px;margin-bottom:10px;position:relative}
+.inum{font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#b8924a;margin-bottom:12px}
+.rm-btn{position:absolute;top:14px;right:14px;background:#fdf0f0;border:1px solid rgba(154,44,44,0.2);color:#9a2c2c;border-radius:6px;padding:6px 10px;font-size:13px;cursor:pointer;font-family:'DM Mono',monospace}
+.add-btn{width:100%;padding:16px;border:1px dashed #ddd9d2;border-radius:10px;background:transparent;color:#8a847a;font-family:'DM Mono',monospace;font-size:14px;cursor:pointer;margin-top:6px}
+.add-btn:active{border-color:#b8924a;color:#b8924a}
+.sub-btn{width:100%;padding:18px;background:#1a1814;color:#c8a96e;border:none;border-radius:10px;font-family:'DM Mono',monospace;font-size:15px;letter-spacing:0.1em;text-transform:uppercase;font-weight:500;cursor:pointer;margin-top:8px}
+.sub-btn:disabled{opacity:0.5;cursor:default}
+.spinner{display:none;text-align:center;padding:14px;color:#8a847a;font-size:13px}
+.err{background:#fdf0f0;border:1px solid rgba(154,44,44,0.2);color:#9a2c2c;border-radius:8px;padding:14px 16px;font-size:13px;margin-top:10px;display:none;line-height:1.5}
+#success-view{display:none;text-align:center;padding:40px 20px}
+.sicon{font-size:56px;margin-bottom:16px}
+.stit{font-family:'Fraunces',serif;font-size:26px;font-weight:300;color:#3a6b4a;margin-bottom:8px}
+.sid{font-size:13px;color:#8a847a;margin-bottom:24px;font-family:monospace;line-height:1.6}
+.snote{font-size:13px;color:#5a7a6a;line-height:1.7;background:#edf5f0;border:1px solid rgba(58,107,74,0.2);border-radius:10px;padding:16px;text-align:left}
+.new-btn{width:100%;padding:16px;background:#1a1814;color:#c8a96e;border:none;border-radius:10px;font-family:'DM Mono',monospace;font-size:14px;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;margin-top:16px}
 </style>
 </head>
 <body>
-
 <div class="hdr">
   <div class="hdr-label">Florida Auto Center</div>
   <div class="hdr-title">Maintenance Estimate</div>
 </div>
-
-<!-- FORM -->
 <div class="content">
 <div id="form-view">
-
   <div class="section">
     <div class="stitle">Vehicle Info</div>
     <div class="field">
       <label>VIN <span class="req">*</span></label>
-      <input type="text" id="vin" maxlength="17" placeholder="Last 6 or full VIN"
-        autocomplete="off" autocorrect="off" autocapitalize="characters" spellcheck="false">
+      <input type="text" id="vin" maxlength="17" placeholder="Last 6 or full VIN" autocomplete="off" autocorrect="off" autocapitalize="characters" spellcheck="false">
     </div>
     <div class="g2">
-      <div class="field" style="margin:0">
-        <label>Year <span class="req">*</span></label>
-        <input type="number" id="year" placeholder="2021" min="1990" max="2035">
-      </div>
-      <div class="field" style="margin:0">
-        <label>Mileage</label>
-        <input type="number" id="mileage" placeholder="85000">
-      </div>
+      <div class="field" style="margin:0"><label>Year <span class="req">*</span></label><input type="number" id="year" placeholder="2021" min="1990" max="2035"></div>
+      <div class="field" style="margin:0"><label>Mileage</label><input type="number" id="mileage" placeholder="85000"></div>
     </div>
-    <div class="field" style="margin-top:14px">
-      <label>Make <span class="req">*</span></label>
-      <input type="text" id="make" placeholder="Toyota, Honda, Ford…" autocorrect="off">
-    </div>
-    <div class="field">
-      <label>Model <span class="req">*</span></label>
-      <input type="text" id="model" placeholder="Camry, Civic, F-150…" autocorrect="off">
-    </div>
+    <div class="field" style="margin-top:14px"><label>Make <span class="req">*</span></label><input type="text" id="make" placeholder="Toyota, Honda, Ford…" autocorrect="off"></div>
+    <div class="field"><label>Model <span class="req">*</span></label><input type="text" id="model" placeholder="Camry, Civic, F-150…" autocorrect="off"></div>
   </div>
-
   <div class="section">
     <div class="stitle">Services & Parts</div>
     <div id="items-wrap"></div>
     <button class="add-btn" onclick="addItem()">+ Add Item</button>
   </div>
-
   <div class="section">
     <div class="stitle">Notes (optional)</div>
-    <textarea id="notes" placeholder="Additional observations about the vehicle or services…"></textarea>
+    <textarea id="notes" placeholder="Additional observations…"></textarea>
   </div>
-
   <button class="sub-btn" id="sub-btn" onclick="submitForm()">Submit Estimate →</button>
   <div class="spinner" id="spinner">Sending estimate…</div>
   <div class="err" id="err"></div>
-
 </div>
-
-<!-- SUCCESS -->
 <div id="success-view">
   <div class="sicon">✅</div>
   <div class="stit">Estimate Sent!</div>
   <div class="sid" id="success-id"></div>
-  <div class="snote">
-    Your estimate has been submitted for approval.<br><br>
-    You will receive a confirmation email shortly.
-  </div>
+  <div class="snote">Your estimate has been submitted for approval.<br><br>You will receive a confirmation shortly.</div>
   <button class="new-btn" onclick="resetForm()">New Estimate →</button>
 </div>
-
 </div>
 
 <script>
-// ── CONFIG
 const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwgsyp_OtW_jIvRwV-CStJMFgmUTPNSqd09wokqpPcMQG05FyVCk3oNfW28m4DcaoFa9A/exec";
-
 let ic = 0;
 
-// ── ADD ITEM
 function addItem() {
   ic++;
   const idx = ic;
@@ -347,52 +98,31 @@ function addItem() {
   d.innerHTML = `
     <div class="inum">Item ${idx}</div>
     ${idx > 1 ? `<button class="rm-btn" onclick="rmItem(${idx})">✕</button>` : ''}
-    <div class="field">
-      <label>Description <span class="req">*</span></label>
-      <input type="text" id="desc-${idx}" placeholder="e.g. Rear Brake Pads" autocorrect="off">
-    </div>
+    <div class="field"><label>Description <span class="req">*</span></label>
+      <input type="text" id="desc-${idx}" placeholder="e.g. Rear Brake Pads" autocorrect="off"></div>
     <div class="g2">
-      <div class="field" style="margin:0">
-        <label>Parts $</label>
-        <input type="number" id="parts-${idx}" placeholder="0.00" step="0.01" min="0">
-      </div>
-      <div class="field" style="margin:0">
-        <label>Labor $</label>
-        <input type="number" id="labor-${idx}" placeholder="0.00" step="0.01" min="0">
-      </div>
-      <div class="field" style="margin:0">
-        <label>Supplier</label>
-        <input type="text" id="sup-${idx}" placeholder="Amazon, Worldpac…" autocorrect="off">
-      </div>
-      <div class="field" style="margin:0">
-        <label>Mechanic <span class="req">*</span></label>
-        <input type="text" id="mech-${idx}" placeholder="Name or shop" autocorrect="off">
-      </div>
+      <div class="field" style="margin:0"><label>Parts $</label><input type="number" id="parts-${idx}" placeholder="0.00" step="0.01" min="0"></div>
+      <div class="field" style="margin:0"><label>Labor $</label><input type="number" id="labor-${idx}" placeholder="0.00" step="0.01" min="0"></div>
+      <div class="field" style="margin:0"><label>Supplier</label><input type="text" id="sup-${idx}" placeholder="Amazon, Worldpac…" autocorrect="off"></div>
+      <div class="field" style="margin:0"><label>Mechanic <span class="req">*</span></label><input type="text" id="mech-${idx}" placeholder="Name or shop" autocorrect="off"></div>
     </div>`;
   document.getElementById('items-wrap').appendChild(d);
-  setTimeout(() => {
-    const el = document.getElementById('desc-' + idx);
-    if (el) el.focus();
-  }, 100);
+  setTimeout(() => { const el = document.getElementById('desc-' + idx); if (el) el.focus(); }, 100);
 }
 
-function rmItem(idx) {
-  const el = document.getElementById('ic' + idx);
-  if (el) el.remove();
-}
+function rmItem(idx) { const el = document.getElementById('ic' + idx); if (el) el.remove(); }
 
 function getItems() {
   const cards = document.querySelectorAll('.icard');
-  const items = [];
-  let valid = true;
+  const items = []; let valid = true;
   cards.forEach(c => {
     const id = c.id.replace('ic', '');
     const desc = (document.getElementById('desc-' + id)?.value || '').trim();
     if (!desc) { valid = false; return; }
     items.push({
-      desc,
-      parts:    parseFloat(document.getElementById('parts-' + id)?.value) || 0,
-      labor:    parseFloat(document.getElementById('labor-' + id)?.value) || 0,
+      desc, 
+      parts: parseFloat(document.getElementById('parts-' + id)?.value) || 0,
+      labor: parseFloat(document.getElementById('labor-' + id)?.value) || 0,
       supplier: (document.getElementById('sup-' + id)?.value || '').trim(),
       mechanic: (document.getElementById('mech-' + id)?.value || '').trim()
     });
@@ -400,7 +130,6 @@ function getItems() {
   return valid ? items : null;
 }
 
-// ── SUBMIT
 function submitForm() {
   const vin     = document.getElementById('vin').value.trim().toUpperCase();
   const year    = document.getElementById('year').value.trim();
@@ -409,59 +138,39 @@ function submitForm() {
   const mileage = document.getElementById('mileage').value.trim();
   const notes   = document.getElementById('notes').value.trim();
 
-  if (!vin || !year || !make || !model) {
-    showErr('Please fill in all required fields: VIN, Year, Make and Model.');
-    return;
-  }
-
+  if (!vin || !year || !make || !model) { showErr('Please fill in: VIN, Year, Make and Model.'); return; }
   const items = getItems();
-  if (!items || items.length === 0) {
-    showErr('Please add at least one item with a description.');
-    return;
-  }
+  if (!items || items.length === 0) { showErr('Please add at least one item with a description.'); return; }
 
   document.getElementById('sub-btn').disabled = true;
   document.getElementById('spinner').style.display = 'block';
   document.getElementById('err').style.display = 'none';
 
+  // Usa GET com parâmetros para evitar CORS
   const payload = { action: 'submitEstimate', data: { vin, year, make, model, mileage, notes, items } };
+  const url = APPS_SCRIPT_URL + '?payload=' + encodeURIComponent(JSON.stringify(payload));
 
-  fetch(APPS_SCRIPT_URL, {
-    method: 'POST',
-    mode: 'no-cors',
-    headers: { 'Content-Type': 'text/plain' },
-    body: JSON.stringify(payload)
-  })
-  .then(() => {
+  const img = new Image();
+  img.onload = img.onerror = () => {
     document.getElementById('spinner').style.display = 'none';
-    document.getElementById('success-id').textContent =
-      make.toUpperCase() + ' ' + model.toUpperCase() + ' ' + year + '\nVIN: ...' + vin.slice(-6);
+    document.getElementById('success-id').textContent = make.toUpperCase() + ' ' + model.toUpperCase() + ' ' + year + '\nVIN: ...' + vin.slice(-6);
     document.getElementById('form-view').style.display = 'none';
     document.getElementById('success-view').style.display = 'block';
     window.scrollTo(0, 0);
-  })
-  .catch(err => {
-    document.getElementById('spinner').style.display = 'none';
-    document.getElementById('sub-btn').disabled = false;
-    showErr('Connection error. Please check your internet and try again.');
-    console.error(err);
-  });
+  };
+  img.src = url;
 }
 
 function showErr(msg) {
   const el = document.getElementById('err');
-  el.textContent = msg;
-  el.style.display = 'block';
+  el.textContent = msg; el.style.display = 'block';
   el.scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
 
 function resetForm() {
-  ['vin','year','make','model','mileage','notes'].forEach(id => {
-    document.getElementById(id).value = '';
-  });
+  ['vin','year','make','model','mileage','notes'].forEach(id => document.getElementById(id).value = '');
   document.getElementById('items-wrap').innerHTML = '';
-  ic = 0;
-  addItem();
+  ic = 0; addItem();
   document.getElementById('sub-btn').disabled = false;
   document.getElementById('success-view').style.display = 'none';
   document.getElementById('form-view').style.display = 'block';
@@ -469,7 +178,6 @@ function resetForm() {
   window.scrollTo(0, 0);
 }
 
-// ── INIT
 addItem();
 </script>
 </body>
